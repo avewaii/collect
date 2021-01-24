@@ -1,8 +1,17 @@
+body {
+    /*overflow:  hidden;*/
+    height: 100%;
+}
+
+.parent-row {
+    height: 100vh;
+}
 .form-horizontal{
 background: #fff;
 padding-bottom: 40px;
 border-radius: 15px;
 text-align: center;
+box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .form-horizontal .heading{
 display: block;
@@ -110,15 +119,4 @@ padding: 10px 25px;
 border: none;
 text-transform: capitalize;
 transition: all 0.5s ease 0s;
-}
-@media only screen and (max-width: 479px){
-.form-horizontal .form-group{
-padding: 0 25px;
-}
-.form-horizontal .form-group i{
-left: 45px;
-}
-.form-horizontal .btn{
-padding: 10px 20px;
-}
 }

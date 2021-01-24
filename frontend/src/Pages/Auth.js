@@ -4,19 +4,21 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './registration-style.css';
 
-function Registration() {
+function Auth() {
     let [ userData, setUserData ] = useState({});
 
     function submitForm(e) {
+        e.preventDefault();
 
-        axios.post('api/users/register', userData)
-            .then((response) => {
-                console.log('resp:', response);
+        axios.post('api/login', userData)
+            .then(response => localStorage.setItem('sessionID', response.data["session"]))
+            .then(() => {
+                // Redirect to another screen
             })
             .catch((error) => {
-                console.log(error);
+                // Show error message
             });
-        e.preventDefault();
+
     }
 
     return(
@@ -25,7 +27,7 @@ function Registration() {
                 <div className="col-md-4 align-self-center">
 
                     <form onSubmit={submitForm} className="form-horizontal">
-                        <span className="heading">Registration</span>
+                        <span className="heading">Authorization</span>
                         <div className="form-group">
                             <input name="email" onChange={(e) => setUserData({...userData, [e.target.name]: e.target.value})} type="email" className="form-control" id="inputEmail" placeholder="E-mail"/>
                             <i className="fa fa-user"></i>
@@ -44,4 +46,4 @@ function Registration() {
     )
 }
 
-export default Registration;
+export default Auth;
