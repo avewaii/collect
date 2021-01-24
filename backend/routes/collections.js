@@ -27,8 +27,6 @@ router.get('/collections', utils.authRequired, function (req, res, next) {
 
 router.post('/collections', function (req, res, next) {
 
-
-
     let data = [req.body.id, req.body.name, req.body.description];
 
     connection.query('INSERT INTO collections (id, name, description) VALUES(?, ?, ?) ', data, function (err, results, fields) {

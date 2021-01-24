@@ -26,10 +26,7 @@ app.use('/users', usersRouter);
 app.use('/', sessionsRouter);
 app.use('/', collectionsRouter);
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-// app.use('/sessions', sessionsRouter);
-// app.use('/collections', collectionsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

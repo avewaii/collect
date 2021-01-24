@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from "axios";
@@ -10,12 +9,12 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-axios.interceptors.response.use((response) => response, (error) => {
-    if (error && error.response && error.response.status === 401) {
-        localStorage.removeItem("sessionID")
-    }
-    throw error;
-});
+// axios.interceptors.response.use((response) => response, (error) => {
+//     if (error && error.response && error.response.status === 401) {
+//         localStorage.removeItem("sessionID")
+//     }
+//     throw error;
+// });
 
 ReactDOM.render(
   <React.StrictMode>

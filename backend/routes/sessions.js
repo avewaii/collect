@@ -32,9 +32,6 @@ router.post('/login', function (req, res, next) {
 
     connection.query('SELECT id FROM users WHERE email = ? AND password = ?', [req.body.email, passwordHash], function (err, results) {
 
-        console.log('results!!', results); //[ RowDataPacket { id: 10 } ]
-
-
         if (err || !results || !results.length) {
             res.status(401).send("Bad credentials")
             return

@@ -14,6 +14,8 @@ function Auth() {
             .then(response => localStorage.setItem('sessionID', response.data["session"]))
             .then(() => {
                 // Redirect to another screen
+                window.location.href = '/';
+
             })
             .catch((error) => {
                 // Show error message

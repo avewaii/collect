@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require("mysql");
 const crypto = require('crypto');
 const moment = require('moment');
-const utils = require('../utils');
+// const utils = require('../utils');
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -21,21 +21,23 @@ router.post('/register', function (req, res, next) {
 
     let data = [req.body.email, passwordHash, moment().format('YYYY-MM-DD HH:mm:ss'), req.body.status];
 
-    connection.query('SELECT id FROM users WHERE email = ? AND password = ?', [req.body.email, passwordHash], function (err, results) {
+    connection.query('SELECT id FROM users WHERE email = ?', [req.body.email], function (err, results) {
 
-        if (results || results.length || !err) {
+        console.log(results)
+
+        if (err || results.length) {
             res.status(401).send("User has already registered");
             return
         }
 
         connection.query('INSERT INTO users(email, password, last_login, blocked) VALUES(?, ?, ?, ?) ', data, function (err, results, fields) {
-            !err ? res.json(results) : res.json(err);
+            !err ? res.send("Success") : res.json(err);
         })
 
     })
 })
 
-router.get('/deleteUser', utils.adminRequired, function (req, res, next) {
+router.get('/deleteUser', function (req, res, next) {
     connection.query('SELECT * FROM users', function (err, result) {
         res.send({...result});
 
@@ -44,14 +46,13 @@ router.get('/deleteUser', utils.adminRequired, function (req, res, next) {
     });
 })
 
-router.post('/deleteUser', utils.adminRequired, function (req, res, next) {
+router.post('/deleteUser', function (req, res, next) {
 
     let UsersId = req.body;
 
     connection.query('DELETE FROM users WHERE id IN (?) ', [UsersId], function (err, results, fields) {
         !err ? res.json(results) : res.json(err);
     })
-
 })
 
 module.exports = router;
