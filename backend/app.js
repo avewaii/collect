@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/home');
 let sessionsRouter = require('./routes/sessions');
 let collectionsRouter = require('./routes/collections');
 
@@ -25,7 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', sessionsRouter);
 app.use('/', collectionsRouter);
-
+app.use("/", homeRouter)
 
 
 // catch 404 and forward to error handler

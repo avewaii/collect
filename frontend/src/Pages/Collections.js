@@ -12,8 +12,11 @@ function Collections() {
 
     useEffect(() => {
         (async () => {
-            let response = await fetch('http://localhost:3000/api/collections');
-            setCollections(Object.values(await response.json()))
+            axios.get('/api/collections')
+                .then(response => setCollections(Object.values(response.data)))
+                .catch((error) => {
+                    console.log(error)
+                })
         })()
     }, [])
 

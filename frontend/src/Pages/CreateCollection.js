@@ -8,12 +8,10 @@ import Header from "../Components/Header";
 
 function CreateCollection() {
 
-    let [ collection, setCollection ] = useState({id: 1});
+    let [ collection, setCollection ] = useState({});
 
     function createNewCollection(e) {
         e.preventDefault();
-
-        setCollection({...collection, id: collection.id + 1 })
 
         axios.post('api/collections', collection)
             .then((response) => {

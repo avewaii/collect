@@ -13,19 +13,6 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-
-router.get('/sessions', function (req, res, next) {
-
-    connection.query('SELECT * FROM sessions', function (err, result) {
-        res.send({ title: 'Hello', ...result});
-
-        console.log(err);
-        console.log(result); // собственно данные
-    });
-
-})
-
-
 router.post('/login', function (req, res, next) {
 
     let passwordHash = crypto.createHash('sha256').update(req.body.password).digest('hex');

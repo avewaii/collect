@@ -9,13 +9,11 @@ import axios from "axios";
 
 function Home() {
 
-    axios.post('/identifyUser', localStorage.getItem('sessionID'))
+    axios.get('/api/identifyUser')
         .then(response => console.log(response))
         .catch((error) => {
             console.log(error)
         })
-
-
 
     return(
         <>
