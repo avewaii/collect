@@ -28,8 +28,11 @@ function CreateCollection() {
 
     return(
         <>
-        <h4>create new collection</h4>
-        <form onSubmit={createNewCollection} className='container col-md-6 col-xl-8'>
+        <div className='container align-items-center'>
+            <h4>create new collection</h4>
+        </div>
+
+        <form onSubmit={createNewCollection} className='container col-md-6 col-xl-8 mt-5'>
             <div className="form-group row">
                 <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Name</label>
                 <div className="col-sm-10">
@@ -75,7 +78,7 @@ function CreateCollection() {
                 <label className="form-check-label" htmlFor="tags">Tags</label>
             </div>
 
-            <div className="form-group container row">
+            <div className="form-group row justify-content-center mt-4">
                 <div className="col-sm-10">
                     <button type="submit" className="btn btn-primary">Create new collection</button>
                 </div>

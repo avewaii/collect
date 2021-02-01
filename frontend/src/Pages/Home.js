@@ -17,7 +17,9 @@ function Home() {
 
     return(
         <>
-        <h1>Home page</h1>
+        <Header/>
+
+        <h4>Home</h4>
         <p>User's session: {localStorage.getItem('sessionID')}</p>
 
         </>

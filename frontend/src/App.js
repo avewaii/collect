@@ -1,13 +1,14 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Registration from './Pages/Registration';
 import Home from './Pages/Home';
 import Table from '../src/Pages/Table';
 import Auth from './Pages/Auth';
 import Collections from './Pages/Collections';
-import CreateCollection from "./Pages/CreateCollection";
-import EditCollection from "./Pages/EditCollection";
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import CreateCollection from './Pages/CreateCollection';
+import EditCollection from './Pages/EditCollection';
+import CollectionItems from './Pages/CollectionItems';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path={'/collections'} exact component={Collections} />
         <Route path={'/createCollection'} exact component={CreateCollection} />
         <Route path={'/editCollection'} exact component={EditCollection} />
+        <Route path={'/collection'} exact component={CollectionItems} />
       </Switch>
     </BrowserRouter>
   );

@@ -2,13 +2,17 @@ import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "../Components/Header";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import {CollectionContext, TableContext} from "../TableContext";
+import Home from "./Home";
+import CollectionItems from "./CollectionItems";
 
 
 function Collections() {
 
     let [collections, setCollections] = useState([]);
+
+    let [chosenCollection, setChosenCollection] = useState();
 
     useEffect(() => {
         (async () => {
@@ -22,14 +26,12 @@ function Collections() {
 
     function addCollection(e) {
         e.preventDefault();
-        alert('add new collection');
+
         console.log('collections', collections);
         window.location.href = 'createCollection';
     }
 
     function deleteCollection(e) {
-        alert('delete collection');
-
         let collectionId = e.target.value;
 
         axios.post('api/deleteCollection', collectionId)
@@ -45,35 +47,40 @@ function Collections() {
 
     function editCollection(e) {
         e.preventDefault();
-        alert('edit function');
-
         window.location.href = 'editCollection';
-
     }
 
 
     return(
         <>
             <Header/>
-            <h2>My collections</h2>
-            {/**/}
-            <button onClick={ (e) => addCollection(e)}type="button" className="btn btn-outline-secondary">+ add new collection</button>
+            <div className="row justify-content-around col-lg-6 m-3">
+                <h4>My collections</h4>
+                <button onClick={ (e) => addCollection(e)} type="button" className="btn btn-secondary btn-sm">Add new collection</button>
+            </div>
 
             <TableContext.Provider value={{ collections, setCollections }}>
 
             <ul className="list-group">
-                {collections.map((collections, index) => (
+                { !collections.length ?
+                    <div className="align-self-center align-items-end">
+                        <h5>You don't have a collections yet</h5>
+                    </div>
+                    :
+                    collections.map((collections, index) => (
                     <li key={collections.id} className="list-group-item d-flex justify-content-between">
+
                             <div className="d-flex">
                                 <div>
-                                    <img src="?"/>
+                                    <img src="?" alt='collection icon'/>
                                 </div>
                                 <div>
                                     <p>id: {collections.id}</p>
                                     <h5>
-                                        <Link to={`/collection/${collections.name} ${collections.id}`}>
-                                            {/*<a href='/'>*/}
-                                                {collections.name}
+                                        <Link to={`/collection/${collections.name}/${collections.id}`}
+                                        onClick={(e) => setChosenCollection(collections.id)}>
+                                            {/*<a href='collection'>*/}
+                                                    {collections.name}
                                             {/*</a>*/}
                                         </Link>
 
@@ -84,13 +91,12 @@ function Collections() {
                                 </div>
                             </div>
                             <div>
-                                <button onClick={(e)=> editCollection(e)}type="button" className="btn btn-light">Edit</button>
+                                <button onClick={(e)=> editCollection(e)} type="button" className="btn btn-light">Edit</button>
                                 <button onClick={(e)=> deleteCollection(e)} value={collections.id} type="button" className="btn btn-light">Delete</button>
                             </div>
                     </li>
                 ))}
             </ul>
-
             </TableContext.Provider>
         </>
     )
